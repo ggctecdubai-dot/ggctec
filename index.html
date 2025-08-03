@@ -8,64 +8,96 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="https://via.placeholder.com/32x32.png?text=GGC" type="image/png" />
     <style>
-      html {
-        scroll-behavior: smooth;
-      }
       body {
         font-family: 'Outfit', sans-serif;
+        scroll-behavior: smooth;
+      }
+      .animate-fade {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 1s ease-out, transform 1s ease-out;
+      }
+      .animate-fade.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .whatsapp-float {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background-color: #25D366;
+        color: white;
+        border-radius: 50%;
+        width: 60px;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        z-index: 100;
       }
     </style>
   </head>
-  <body class="bg-gray-50 text-gray-800 relative">
+  <body class="bg-gray-50 text-gray-800">
     <!-- Hero Section -->
-    <section class="relative bg-cover bg-center h-[70vh]" style="background-image: url('https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=1500&q=80');">
-      <div class="absolute inset-0 bg-blue-900 bg-opacity-60 flex items-center justify-center">
-        <div class="text-center text-white px-4 animate-fadeIn">
-          <h1 class="text-4xl md:text-5xl font-bold mb-4 drop-shadow-md tracking-wide">GGC Technical Services</h1>
-          <p class="text-lg md:text-xl font-medium drop-shadow-sm">Reliable Home & Commercial Solutions Under One Roof</p>
-          <a href="#services" class="mt-6 inline-block px-6 py-3 bg-white text-blue-700 font-semibold rounded-xl shadow hover:bg-gray-200 transition">Explore Our Services</a>
-        </div>
+    <section class="relative h-[60vh] bg-cover bg-center text-white flex items-center justify-center" style="background-image: url('https://images.unsplash.com/photo-1581092160628-7f08c9dfb03e?fit=crop&w=1500&q=80');">
+      <div class="absolute inset-0 bg-blue-800 bg-opacity-60"></div>
+      <div class="relative text-center z-10 px-4">
+        <h1 class="text-4xl md:text-5xl font-bold mb-4">GGC Technical Services</h1>
+        <p class="text-lg md:text-xl mb-6">Your one-stop solution for reliable technical services in the UAE</p>
+        <a href="#services" class="bg-white text-blue-600 font-semibold px-6 py-3 rounded-full shadow hover:bg-blue-100">Explore Our Services</a>
+      </div>
+    </section>
+
+    <!-- About Us -->
+    <section class="py-16 bg-white">
+      <div class="max-w-4xl mx-auto px-4 text-center animate-fade">
+        <h2 class="text-3xl font-bold mb-4">About GGC Technical Services</h2>
+        <p class="text-lg text-gray-600 leading-relaxed">
+          GGC Technical Services is a UAE-based company committed to providing reliable, professional, and cost-effective solutions for homes and businesses.
+          With a highly skilled team and years of industry experience, we aim to deliver outstanding service quality across all technical domains — from AC repairs to complete renovations.
+        </p>
       </div>
     </section>
 
     <!-- Services -->
-    <section id="services" class="py-16 animate-fadeInUp">
+    <section id="services" class="py-16">
       <div class="max-w-6xl mx-auto px-4">
-        <h2 class="text-3xl font-bold text-center mb-10">Our Services</h2>
+        <h2 class="text-3xl font-bold text-center mb-10 animate-fade">Our Services</h2>
         <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-          <!-- Service Item -->
-          <div class="bg-white rounded-xl shadow p-6 transition duration-300 hover:shadow-lg">
+          <div class="bg-white rounded-xl shadow p-6 animate-fade">
             <img src="ac.jpg" alt="AC Maintenance" class="mb-4 mx-auto rounded-xl" />
             <h3 class="text-xl font-semibold mb-2 text-center">AC Maintenance</h3>
             <p class="text-center text-sm">AC Coil & Duct Cleaning, HVAC Maintenance</p>
           </div>
 
-          <div class="bg-white rounded-xl shadow p-6 transition duration-300 hover:shadow-lg">
+          <div class="bg-white rounded-xl shadow p-6 animate-fade">
             <img src="eandp.jpg" alt="Electrical" class="mb-4 mx-auto rounded-xl" />
             <h3 class="text-xl font-semibold mb-2 text-center">Electrical & Plumbing</h3>
             <p class="text-center text-sm">General electrical work, plumbing, water heater, and shower mixer replacement</p>
           </div>
 
-          <div class="bg-white rounded-xl shadow p-6 transition duration-300 hover:shadow-lg">
+          <div class="bg-white rounded-xl shadow p-6 animate-fade">
             <img src="randc.jpg" alt="Renovation" class="mb-4 mx-auto rounded-xl" />
             <h3 class="text-xl font-semibold mb-2 text-center">Renovations & Civil</h3>
             <p class="text-center text-sm">Bathroom, masonry, tiling, waterproofing, villa extensions</p>
           </div>
 
-          <div class="bg-white rounded-xl shadow p-6 transition duration-300 hover:shadow-lg">
+          <div class="bg-white rounded-xl shadow p-6 animate-fade">
             <img src="carp.jpg" alt="Carpentry" class="mb-4 mx-auto rounded-xl" />
             <h3 class="text-xl font-semibold mb-2 text-center">Carpentry & Painting</h3>
             <p class="text-center text-sm">Interior painting, carpentry, and refurbishments</p>
           </div>
 
-          <div class="bg-white rounded-xl shadow p-6 transition duration-300 hover:shadow-lg">
+          <div class="bg-white rounded-xl shadow p-6 animate-fade">
             <img src="cleanin.jpg" alt="Pest Control" class="mb-4 mx-auto rounded-xl" />
             <h3 class="text-xl font-semibold mb-2 text-center">Cleaning & Pest Control</h3>
             <p class="text-center text-sm">General deep cleaning, pest control solutions</p>
           </div>
 
-          <div class="bg-white rounded-xl shadow p-6 transition duration-300 hover:shadow-lg">
+          <div class="bg-white rounded-xl shadow p-6 animate-fade">
             <img src="maint.jpg" alt="Maintenance" class="mb-4 mx-auto rounded-xl" />
             <h3 class="text-xl font-semibold mb-2 text-center">Maintenance & AMC</h3>
             <p class="text-center text-sm">Annual maintenance contracts, snagging services</p>
@@ -75,8 +107,8 @@
     </section>
 
     <!-- Contact Info -->
-    <section class="bg-gray-100 py-12 animate-fadeIn">
-      <div class="max-w-4xl mx-auto px-4 text-center">
+    <section class="bg-gray-100 py-12">
+      <div class="max-w-4xl mx-auto px-4 text-center animate-fade">
         <h2 class="text-2xl font-bold mb-4">Contact Us</h2>
         <p>Email: <a href="mailto:office@ggctec.com" class="text-blue-600">office@ggctec.com</a></p>
         <p>Phone: <a href="tel:+971506033347" class="text-blue-600">+971-050-6033347</a></p>
@@ -84,26 +116,34 @@
       </div>
     </section>
 
-    <!-- WhatsApp Floating Button -->
-    <a href="https://wa.me/971506033347" target="_blank" aria-label="WhatsApp" class="fixed bottom-5 right-5 z-50">
-      <img src="https://img.icons8.com/ios-filled/50/25D366/whatsapp--v1.png" alt="WhatsApp" class="w-14 h-14 shadow-lg rounded-full" />
-    </a>
-
     <!-- Footer -->
     <footer class="bg-blue-600 text-white py-6 text-center">
       <p>&copy; 2025 GGC Technical Services. All rights reserved.</p>
     </footer>
 
-    <!-- Animations (using Tailwind + simple fadeIn) -->
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/971506033347" class="whatsapp-float" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" class="w-8 h-8" />
+    </a>
+
     <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        const fadeElements = document.querySelectorAll(".animate-fadeIn, .animate-fadeInUp");
-        fadeElements.forEach((el) => {
-          el.classList.add("opacity-0", "translate-y-4");
-          setTimeout(() => {
-            el.classList.remove("opacity-0", "translate-y-4");
-            el.classList.add("transition", "duration-1000", "opacity-100", "translate-y-0");
-          }, 200);
+      document.addEventListener('DOMContentLoaded', () => {
+        const faders = document.querySelectorAll('.animate-fade');
+        const options = {
+          threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, options);
+
+        faders.forEach(el => {
+          observer.observe(el);
         });
       });
     </script>
