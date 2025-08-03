@@ -4,11 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>GGC Technical Services</title>
+    <link rel="icon" type="image/png" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🛠️</text></svg>">
     <script src="https://cdn.tailwindcss.com"></script>
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    <link rel="icon" href="https://via.placeholder.com/32x32.png?text=GGC" type="image/png">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
       body {
@@ -18,65 +16,96 @@
     </style>
   </head>
   <body class="bg-gray-50 text-gray-800">
-    <!-- Image Slider Hero Section -->
-    <section x-data="{ currentSlide: 0, slides: [
-        { image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c', caption: 'Reliable AC & Electrical Services Across UAE' },
-        { image: 'https://images.unsplash.com/photo-1597003724763-7b9ed5c63565', caption: 'Expert Renovation, Plumbing & Civil Works Under One Roof' },
-        { image: 'https://images.unsplash.com/photo-1618832515497-0e9696c847f0', caption: 'Annual Maintenance Contracts That Give You Peace of Mind' },
-      ] }" x-init="setInterval(() => currentSlide = (currentSlide + 1) % slides.length, 5000)" class="relative h-[70vh] overflow-hidden">
-      <template x-for="(slide, index) in slides" :key="index">
-        <div x-show="currentSlide === index" x-transition.opacity class="absolute inset-0">
-          <img :src="slide.image" class="w-full h-full object-cover" alt="Hero Slide">
-          <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-            <div class="text-center text-white px-4">
-              <h1 class="text-3xl md:text-5xl font-bold mb-4" x-text="slide.caption"></h1>
-              <a href="#services" class="bg-white text-blue-600 px-6 py-3 rounded-full font-semibold shadow hover:bg-blue-50 transition">Explore Our Services</a>
-            </div>
-          </div>
-        </div>
+
+    <!-- Image Slider with Captions -->
+    <section x-data="{
+      currentSlide: 1,
+      total: 3,
+      paused: false,
+      next() { this.currentSlide = this.currentSlide === this.total ? 1 : this.currentSlide + 1; },
+      prev() { this.currentSlide = this.currentSlide === 1 ? this.total : this.currentSlide - 1; },
+      init() {
+        setInterval(() => {
+          if (!this.paused) this.next();
+        }, 4000);
+      }
+    }" x-init="init()" class="relative h-[500px] overflow-hidden" @mouseenter="paused = true" @mouseleave="paused = false">
+      <!-- Slides -->
+      <template x-for="i in total" :key="i">
+        <img :src="'header' + i + '.jpg'" :alt="'Slide ' + i"
+          x-show="currentSlide === i"
+          class="absolute w-full h-full object-cover transition-opacity duration-1000 ease-in-out"
+          x-transition:enter="transition-opacity ease-out duration-1000"
+          x-transition:enter-start="opacity-0"
+          x-transition:enter-end="opacity-100"
+        />
       </template>
+
+      <!-- Captions -->
+      <div class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-40 text-white text-center px-4">
+        <template x-if="currentSlide === 1">
+          <h1 class="text-4xl md:text-5xl font-bold">Reliable AC & Electrical Solutions</h1>
+        </template>
+        <template x-if="currentSlide === 2">
+          <h1 class="text-4xl md:text-5xl font-bold">Expert Renovation & Carpentry Services</h1>
+        </template>
+        <template x-if="currentSlide === 3">
+          <h1 class="text-4xl md:text-5xl font-bold">One Roof for All Maintenance Needs</h1>
+        </template>
+      </div>
+
+      <!-- Navigation -->
+      <div class="absolute top-1/2 left-4 transform -translate-y-1/2">
+        <button @click="prev" class="text-white text-3xl">&larr;</button>
+      </div>
+      <div class="absolute top-1/2 right-4 transform -translate-y-1/2">
+        <button @click="next" class="text-white text-3xl">&rarr;</button>
+      </div>
     </section>
 
     <!-- About Us -->
-    <section class="py-16 bg-white">
-      <div class="max-w-4xl mx-auto px-4 text-center">
-        <h2 class="text-3xl font-bold mb-6">About Us</h2>
-        <p class="text-lg text-gray-700">At GGC Technical Services, we are committed to delivering top-notch maintenance and technical solutions throughout the UAE. Our team of professionals brings years of experience and dedication, ensuring that your home or business receives the best care and support it deserves. From minor fixes to large-scale renovations, we’re your reliable partner under one roof.</p>
+    <section class="py-12 bg-white">
+      <div class="max-w-5xl mx-auto px-4 text-center">
+        <h2 class="text-3xl font-bold mb-4">About GGC Technical Services</h2>
+        <p class="text-lg text-gray-700">
+          GGC Technical Services is your trusted partner for complete home and office maintenance in the UAE.
+          From air conditioning and electrical works to renovation and pest control, we offer expert services backed by years of industry experience.
+        </p>
       </div>
     </section>
 
     <!-- Services -->
-    <section id="services" class="py-16">
+    <section class="py-16">
       <div class="max-w-6xl mx-auto px-4">
         <h2 class="text-3xl font-bold text-center mb-10">Our Services</h2>
         <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-          <!-- Service Items -->
-          <div class="bg-white rounded-xl shadow p-6 transition-transform hover:-translate-y-1 duration-300">
+          <!-- Sample service cards (update your image paths accordingly) -->
+          <div class="bg-white rounded-xl shadow p-6">
             <img src="ac.jpg" alt="AC Maintenance" class="mb-4 mx-auto rounded-xl" />
             <h3 class="text-xl font-semibold mb-2 text-center">AC Maintenance</h3>
             <p class="text-center text-sm">AC Coil & Duct Cleaning, HVAC Maintenance</p>
           </div>
-          <div class="bg-white rounded-xl shadow p-6 transition-transform hover:-translate-y-1 duration-300">
+          <div class="bg-white rounded-xl shadow p-6">
             <img src="eandp.jpg" alt="Electrical" class="mb-4 mx-auto rounded-xl" />
             <h3 class="text-xl font-semibold mb-2 text-center">Electrical & Plumbing</h3>
             <p class="text-center text-sm">General electrical work, plumbing, water heater, and shower mixer replacement</p>
           </div>
-          <div class="bg-white rounded-xl shadow p-6 transition-transform hover:-translate-y-1 duration-300">
+          <div class="bg-white rounded-xl shadow p-6">
             <img src="randc.jpg" alt="Renovation" class="mb-4 mx-auto rounded-xl" />
             <h3 class="text-xl font-semibold mb-2 text-center">Renovations & Civil</h3>
             <p class="text-center text-sm">Bathroom, masonry, tiling, waterproofing, villa extensions</p>
           </div>
-          <div class="bg-white rounded-xl shadow p-6 transition-transform hover:-translate-y-1 duration-300">
+          <div class="bg-white rounded-xl shadow p-6">
             <img src="carp.jpg" alt="Carpentry" class="mb-4 mx-auto rounded-xl" />
             <h3 class="text-xl font-semibold mb-2 text-center">Carpentry & Painting</h3>
             <p class="text-center text-sm">Interior painting, carpentry, and refurbishments</p>
           </div>
-          <div class="bg-white rounded-xl shadow p-6 transition-transform hover:-translate-y-1 duration-300">
+          <div class="bg-white rounded-xl shadow p-6">
             <img src="cleanin.jpg" alt="Pest Control" class="mb-4 mx-auto rounded-xl" />
             <h3 class="text-xl font-semibold mb-2 text-center">Cleaning & Pest Control</h3>
             <p class="text-center text-sm">General deep cleaning, pest control solutions</p>
           </div>
-          <div class="bg-white rounded-xl shadow p-6 transition-transform hover:-translate-y-1 duration-300">
+          <div class="bg-white rounded-xl shadow p-6">
             <img src="maint.jpg" alt="Maintenance" class="mb-4 mx-auto rounded-xl" />
             <h3 class="text-xl font-semibold mb-2 text-center">Maintenance & AMC</h3>
             <p class="text-center text-sm">Annual maintenance contracts, snagging services</p>
@@ -95,14 +124,14 @@
       </div>
     </section>
 
-    <!-- WhatsApp Floating Button -->
-    <a href="https://wa.me/971506033347" target="_blank" class="fixed bottom-6 right-6 z-50">
-      <img src="https://img.icons8.com/color/48/000000/whatsapp--v1.png" alt="WhatsApp" class="w-12 h-12 shadow-lg rounded-full">
-    </a>
-
     <!-- Footer -->
     <footer class="bg-blue-600 text-white py-6 text-center">
       <p>&copy; 2025 GGC Technical Services. All rights reserved.</p>
     </footer>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/971506033347" class="fixed bottom-5 right-5 bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-lg z-50" target="_blank" aria-label="Chat on WhatsApp">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 fill-current" viewBox="0 0 24 24"><path d="M20.52 3.48A11.8 11.8 0 0 0 12 0a11.89 11.89 0 0 0-10.4 6.13A11.87 11.87 0 0 0 0 12a11.88 11.88 0 0 0 1.5 5.8L0 24l6.45-1.67A11.83 11.83 0 0 0 12 24c6.6 0 12-5.4 12-12 0-3.2-1.28-6.2-3.48-8.52zm-8.5 18.9c-2.1 0-4.2-.6-6-1.7l-.43-.26-3.84 1 1-3.73-.28-.47a10.14 10.14 0 0 1-1.43-5.1c0-5.6 4.6-10.2 10.2-10.2s10.2 4.6 10.2 10.2-4.6 10.2-10.2 10.2zm5.7-7.4-.9-1.1c-.2-.3-.5-.3-.8-.2-.3.1-1.6.8-1.9.9-.3.1-.5.1-.8-.1l-2.6-2.5c-.2-.2-.2-.5-.1-.7.2-.3.6-.9.8-1.2.2-.3.2-.5 0-.8l-1.2-2.2c-.2-.4-.4-.4-.7-.4h-.6c-.2 0-.6.1-.9.4s-1.1 1.1-1.1 2.7 1.1 3.1 1.3 3.3c.2.3 2.4 3.6 5.9 4.6 2.8.8 3.5.6 4.1.5.6-.1 2-1 2.2-1.6.3-.6.3-1.1.2-1.2z"/></svg>
+    </a>
   </body>
 </html>
