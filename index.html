@@ -5,99 +5,78 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>GGC Technical Services</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <link rel="icon" href="https://via.placeholder.com/32x32.png?text=GGC" type="image/png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="icon" href="https://via.placeholder.com/32x32.png?text=GGC" type="image/png" />
     <style>
       body {
         font-family: 'Outfit', sans-serif;
         scroll-behavior: smooth;
       }
-      .animate-fade {
-        opacity: 0;
-        transform: translateY(20px);
-        transition: opacity 1s ease-out, transform 1s ease-out;
-      }
-      .animate-fade.visible {
-        opacity: 1;
-        transform: translateY(0);
-      }
-      .whatsapp-float {
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        background-color: #25D366;
-        color: white;
-        border-radius: 50%;
-        width: 60px;
-        height: 60px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        z-index: 100;
-      }
     </style>
   </head>
   <body class="bg-gray-50 text-gray-800">
-    <!-- Hero Section -->
-    <section class="relative h-[60vh] bg-cover bg-center text-white flex items-center justify-center" style="background-image: url('https://images.unsplash.com/photo-1581092160628-7f08c9dfb03e?fit=crop&w=1500&q=80');">
-      <div class="absolute inset-0 bg-blue-800 bg-opacity-60"></div>
-      <div class="relative text-center z-10 px-4">
-        <h1 class="text-4xl md:text-5xl font-bold mb-4">GGC Technical Services</h1>
-        <p class="text-lg md:text-xl mb-6">Your one-stop solution for reliable technical services in the UAE</p>
-        <a href="#services" class="bg-white text-blue-600 font-semibold px-6 py-3 rounded-full shadow hover:bg-blue-100">Explore Our Services</a>
-      </div>
+    <!-- Image Slider Hero Section -->
+    <section x-data="{ currentSlide: 0, slides: [
+        { image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c', caption: 'Reliable AC & Electrical Services Across UAE' },
+        { image: 'https://images.unsplash.com/photo-1597003724763-7b9ed5c63565', caption: 'Expert Renovation, Plumbing & Civil Works Under One Roof' },
+        { image: 'https://images.unsplash.com/photo-1618832515497-0e9696c847f0', caption: 'Annual Maintenance Contracts That Give You Peace of Mind' },
+      ] }" x-init="setInterval(() => currentSlide = (currentSlide + 1) % slides.length, 5000)" class="relative h-[70vh] overflow-hidden">
+      <template x-for="(slide, index) in slides" :key="index">
+        <div x-show="currentSlide === index" x-transition.opacity class="absolute inset-0">
+          <img :src="slide.image" class="w-full h-full object-cover" alt="Hero Slide">
+          <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+            <div class="text-center text-white px-4">
+              <h1 class="text-3xl md:text-5xl font-bold mb-4" x-text="slide.caption"></h1>
+              <a href="#services" class="bg-white text-blue-600 px-6 py-3 rounded-full font-semibold shadow hover:bg-blue-50 transition">Explore Our Services</a>
+            </div>
+          </div>
+        </div>
+      </template>
     </section>
 
     <!-- About Us -->
     <section class="py-16 bg-white">
-      <div class="max-w-4xl mx-auto px-4 text-center animate-fade">
-        <h2 class="text-3xl font-bold mb-4">About GGC Technical Services</h2>
-        <p class="text-lg text-gray-600 leading-relaxed">
-          GGC Technical Services is a UAE-based company committed to providing reliable, professional, and cost-effective solutions for homes and businesses.
-          With a highly skilled team and years of industry experience, we aim to deliver outstanding service quality across all technical domains — from AC repairs to complete renovations.
-        </p>
+      <div class="max-w-4xl mx-auto px-4 text-center">
+        <h2 class="text-3xl font-bold mb-6">About Us</h2>
+        <p class="text-lg text-gray-700">At GGC Technical Services, we are committed to delivering top-notch maintenance and technical solutions throughout the UAE. Our team of professionals brings years of experience and dedication, ensuring that your home or business receives the best care and support it deserves. From minor fixes to large-scale renovations, we’re your reliable partner under one roof.</p>
       </div>
     </section>
 
     <!-- Services -->
     <section id="services" class="py-16">
       <div class="max-w-6xl mx-auto px-4">
-        <h2 class="text-3xl font-bold text-center mb-10 animate-fade">Our Services</h2>
+        <h2 class="text-3xl font-bold text-center mb-10">Our Services</h2>
         <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-          <div class="bg-white rounded-xl shadow p-6 animate-fade">
+          <!-- Service Items -->
+          <div class="bg-white rounded-xl shadow p-6 transition-transform hover:-translate-y-1 duration-300">
             <img src="ac.jpg" alt="AC Maintenance" class="mb-4 mx-auto rounded-xl" />
             <h3 class="text-xl font-semibold mb-2 text-center">AC Maintenance</h3>
             <p class="text-center text-sm">AC Coil & Duct Cleaning, HVAC Maintenance</p>
           </div>
-
-          <div class="bg-white rounded-xl shadow p-6 animate-fade">
+          <div class="bg-white rounded-xl shadow p-6 transition-transform hover:-translate-y-1 duration-300">
             <img src="eandp.jpg" alt="Electrical" class="mb-4 mx-auto rounded-xl" />
             <h3 class="text-xl font-semibold mb-2 text-center">Electrical & Plumbing</h3>
             <p class="text-center text-sm">General electrical work, plumbing, water heater, and shower mixer replacement</p>
           </div>
-
-          <div class="bg-white rounded-xl shadow p-6 animate-fade">
+          <div class="bg-white rounded-xl shadow p-6 transition-transform hover:-translate-y-1 duration-300">
             <img src="randc.jpg" alt="Renovation" class="mb-4 mx-auto rounded-xl" />
             <h3 class="text-xl font-semibold mb-2 text-center">Renovations & Civil</h3>
             <p class="text-center text-sm">Bathroom, masonry, tiling, waterproofing, villa extensions</p>
           </div>
-
-          <div class="bg-white rounded-xl shadow p-6 animate-fade">
+          <div class="bg-white rounded-xl shadow p-6 transition-transform hover:-translate-y-1 duration-300">
             <img src="carp.jpg" alt="Carpentry" class="mb-4 mx-auto rounded-xl" />
             <h3 class="text-xl font-semibold mb-2 text-center">Carpentry & Painting</h3>
             <p class="text-center text-sm">Interior painting, carpentry, and refurbishments</p>
           </div>
-
-          <div class="bg-white rounded-xl shadow p-6 animate-fade">
+          <div class="bg-white rounded-xl shadow p-6 transition-transform hover:-translate-y-1 duration-300">
             <img src="cleanin.jpg" alt="Pest Control" class="mb-4 mx-auto rounded-xl" />
             <h3 class="text-xl font-semibold mb-2 text-center">Cleaning & Pest Control</h3>
             <p class="text-center text-sm">General deep cleaning, pest control solutions</p>
           </div>
-
-          <div class="bg-white rounded-xl shadow p-6 animate-fade">
+          <div class="bg-white rounded-xl shadow p-6 transition-transform hover:-translate-y-1 duration-300">
             <img src="maint.jpg" alt="Maintenance" class="mb-4 mx-auto rounded-xl" />
             <h3 class="text-xl font-semibold mb-2 text-center">Maintenance & AMC</h3>
             <p class="text-center text-sm">Annual maintenance contracts, snagging services</p>
@@ -108,7 +87,7 @@
 
     <!-- Contact Info -->
     <section class="bg-gray-100 py-12">
-      <div class="max-w-4xl mx-auto px-4 text-center animate-fade">
+      <div class="max-w-4xl mx-auto px-4 text-center">
         <h2 class="text-2xl font-bold mb-4">Contact Us</h2>
         <p>Email: <a href="mailto:office@ggctec.com" class="text-blue-600">office@ggctec.com</a></p>
         <p>Phone: <a href="tel:+971506033347" class="text-blue-600">+971-050-6033347</a></p>
@@ -116,36 +95,14 @@
       </div>
     </section>
 
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/971506033347" target="_blank" class="fixed bottom-6 right-6 z-50">
+      <img src="https://img.icons8.com/color/48/000000/whatsapp--v1.png" alt="WhatsApp" class="w-12 h-12 shadow-lg rounded-full">
+    </a>
+
     <!-- Footer -->
     <footer class="bg-blue-600 text-white py-6 text-center">
       <p>&copy; 2025 GGC Technical Services. All rights reserved.</p>
     </footer>
-
-    <!-- Floating WhatsApp Button -->
-    <a href="https://wa.me/971506033347" class="whatsapp-float" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" class="w-8 h-8" />
-    </a>
-
-    <script>
-      document.addEventListener('DOMContentLoaded', () => {
-        const faders = document.querySelectorAll('.animate-fade');
-        const options = {
-          threshold: 0.1
-        };
-
-        const observer = new IntersectionObserver((entries, observer) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('visible');
-              observer.unobserve(entry.target);
-            }
-          });
-        }, options);
-
-        faders.forEach(el => {
-          observer.observe(el);
-        });
-      });
-    </script>
   </body>
 </html>
